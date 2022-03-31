@@ -14,3 +14,9 @@ class News(models.Model):
     url = models.URLField(null=True,blank=True,unique=True)
     parent_url  = models.URLField(null=True,blank=True)
 
+
+class ScrapConfig(models.Model):
+    started = models.BooleanField(null=True,blank=True,default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+

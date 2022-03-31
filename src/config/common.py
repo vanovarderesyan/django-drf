@@ -318,6 +318,9 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {'anon': '100/second', 'user': '1000/second', 'subscribe': '60/minute'},
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }
+CRONJOBS = [
+    ('*/5 * * * *', 'src.news.cron.main')
+]
 
 # JWT configuration
 SIMPLE_JWT = {
