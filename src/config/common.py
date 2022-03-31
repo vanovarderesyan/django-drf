@@ -39,6 +39,8 @@ INSTALLED_APPS = (
     'django_inlinecss',  # inline css in templates
     'django_summernote',  # text editor
     'django_celery_beat',  # task scheduler
+    'django_elasticsearch_dsl',  
+    'django_elasticsearch_dsl_drf',
     'djmoney',  # money object
     'health_check',
     'health_check.db',  # stock Django health checkers
@@ -49,6 +51,7 @@ INSTALLED_APPS = (
     # Your apps
     'src.notifications',
     'src.users',
+    'src.news',
     'src.social',
     'src.files',
     'src.common',
@@ -357,3 +360,20 @@ SUMMERNOTE_CONFIG = {
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+from urllib.parse import quote_plus as urlquote
+
+elk_base_url = 'elasticsearch://{user_name}:{password}@{host_ip}:{host_port}'
+elastic_search_url = elk_base_url.format(user_name='elastic',
+                                         password=urlquote('hsVE6sm3NOJ8nnCoTjis'),
+                                         # password may contain special characters
+                                         host_ip='localhost',
+                                         host_port=9200)
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts':[elastic_search_url],
+        'use_ssl': True,
+        'ca_certs' : False,
+        'verify_certs' : False
+    },
+}
